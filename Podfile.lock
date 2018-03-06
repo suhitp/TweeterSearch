@@ -1,0 +1,18 @@
+PODS:
+  - Kingfisher (4.6.1)
+  - TwitterCore (3.1.0)
+  - TwitterKit (3.3.0):
+    - TwitterCore (>= 3.1.0)
+
+DEPENDENCIES:
+  - Kingfisher
+  - TwitterKit
+
+SPEC CHECKSUMS:
+  Kingfisher: 1f9157d9c02b380cbd0b7cc890161195164eb634
+  TwitterCore: 644d59e75abccb26cf0a9050d2c4dea0e5412241
+  TwitterKit: a2e60ddcedbf54091eac6f27685ca7a87681e1d7
+
+PODFILE CHECKSUM: c78ec36d8faa452baacdf7a4f14147d543ef9ad6
+
+COCOAPODS: 1.4.0
