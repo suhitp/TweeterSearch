@@ -79,9 +79,24 @@ class TweetsViewController: UIViewController, TweetViewInput {
     
     func showError(_ error: NetworkError) {
         switch error {
-        case .noInternet: break
-        case .failure(_): break
-        case .timeout: break
+        case .failure(let message):
+            let errorViewController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+            let retryAction = UIAlertAction.init(title: "Retry", style: .default, handler: { [unowned self] _ in
+                self.loadTweets()
+            })
+            errorViewController.addAction(retryAction)
+            let cancelAction = UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil)
+            errorViewController.addAction(cancelAction)
+            present(errorViewController, animated: true, completion: nil)
+        case .loadMoreError:
+            let errorViewController = UIAlertController(title: "Error", message: "Failed to load more tweets", preferredStyle: .alert)
+            let retryAction = UIAlertAction.init(title: "Retry", style: .default, handler: { [unowned self] _ in
+                self.tweetsPresenter.loadMoreTweets()
+            })
+            errorViewController.addAction(retryAction)
+            let cancelAction = UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil)
+            errorViewController.addAction(cancelAction)
+            present(errorViewController, animated: true, completion: nil)
         }
     }
     

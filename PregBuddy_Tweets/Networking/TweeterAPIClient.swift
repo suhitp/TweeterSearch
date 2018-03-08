@@ -14,9 +14,8 @@ enum Result {
 }
 
 enum NetworkError: Error {
-    case noInternet
     case failure(message: String)
-    case timeout
+    case loadMoreError
 }
 
 struct TweeterAPIClient {
@@ -51,7 +50,11 @@ struct TweeterAPIClient {
                     completion(.success(tweets as! [TWTRTweet]))
                 }
             } catch {
-                completion(.error(.failure(message: error.localizedDescription)))
+                if maxId != nil {
+                    completion(Result.error(.loadMoreError))
+                } else {
+                    completion(.error(.failure(message: error.localizedDescription)))
+                }
             }
         }
     }

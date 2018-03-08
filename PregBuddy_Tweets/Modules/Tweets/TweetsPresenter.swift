@@ -16,9 +16,9 @@ enum LoadMoreState {
 }
 
 enum TweetFilterAction: String {
-    case all = "all"
-    case likes = "likes"
-    case retweet = "retweet"
+    case likes = "Likes"
+    case retweet = "Retweet"
+    case all = "All"
 }
 
 protocol TweetsPresenterType: class {
@@ -69,6 +69,7 @@ final class TweetsPresenter: TweetsPresenterType {
                     strongSelf.maxId = tweetId - 1
                 }
             case .error(let error):
+                self?.view.hideLoader()
                 self?.view.showError(error)
             }
         }
