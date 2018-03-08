@@ -6,7 +6,8 @@ target 'PregBuddy_Tweets' do
   use_frameworks!
 
   # Pods for PregBuddy_Tweets
-  pod 'TwitterKit'
+  pod 'TwitterKit', '3.2.1'
+  pod 'TwitterCore', '3.0.2'
   pod 'Kingfisher'
 
   target 'PregBuddy_TweetsTests' do
