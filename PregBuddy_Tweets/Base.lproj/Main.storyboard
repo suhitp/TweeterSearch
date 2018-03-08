@@ -24,7 +24,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cdt-GS-UNR">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cdt-GS-UNR">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -36,27 +36,27 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="141.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QI6-j5-Tef">
-                                                    <rect key="frame" x="15" y="14" width="75" height="75"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QI6-j5-Tef">
+                                                    <rect key="frame" x="15" y="18" width="50" height="50"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="75" id="GJn-ar-UuM"/>
-                                                        <constraint firstAttribute="width" constant="75" id="Uqp-cJ-Dr9"/>
+                                                        <constraint firstAttribute="height" constant="50" id="GJn-ar-UuM"/>
+                                                        <constraint firstAttribute="width" constant="50" id="Uqp-cJ-Dr9"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MlD-fn-CWn">
-                                                    <rect key="frame" x="98" y="14" width="42" height="20"/>
+                                                    <rect key="frame" x="77" y="14" width="42" height="20"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D1H-gy-VHN">
-                                                    <rect key="frame" x="145" y="14" width="40" height="20"/>
+                                                    <rect key="frame" x="124" y="14" width="40" height="20"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fbs-7I-mTC">
-                                                    <rect key="frame" x="98" y="38" width="269" height="62"/>
+                                                    <rect key="frame" x="73" y="38" width="294" height="62"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -90,7 +90,7 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="QI6-j5-Tef" firstAttribute="top" secondItem="OoA-E6-N4P" secondAttribute="top" constant="14" id="0u6-j0-Mtm"/>
+                                                <constraint firstItem="QI6-j5-Tef" firstAttribute="top" secondItem="OoA-E6-N4P" secondAttribute="top" constant="18" id="0u6-j0-Mtm"/>
                                                 <constraint firstItem="QI6-j5-Tef" firstAttribute="leading" secondItem="OoA-E6-N4P" secondAttribute="leading" constant="15" id="0uD-EI-nFX"/>
                                                 <constraint firstItem="f8q-qu-Qn2" firstAttribute="leading" secondItem="OoA-E6-N4P" secondAttribute="leading" constant="98" id="3vq-Cx-jFe"/>
                                                 <constraint firstItem="hK6-px-NVP" firstAttribute="leading" secondItem="f8q-qu-Qn2" secondAttribute="trailing" constant="8" id="7yv-41-0yu"/>
@@ -101,7 +101,7 @@
                                                 <constraint firstItem="fbs-7I-mTC" firstAttribute="top" secondItem="MlD-fn-CWn" secondAttribute="bottom" constant="4" id="M6d-e5-Acg"/>
                                                 <constraint firstItem="Inz-Ad-BpE" firstAttribute="leading" secondItem="b1l-MN-4fH" secondAttribute="trailing" constant="8" id="Nsc-Q3-gan"/>
                                                 <constraint firstItem="D1H-gy-VHN" firstAttribute="leading" secondItem="MlD-fn-CWn" secondAttribute="trailing" constant="5" id="PNQ-U6-mCx"/>
-                                                <constraint firstItem="MlD-fn-CWn" firstAttribute="leading" secondItem="QI6-j5-Tef" secondAttribute="trailing" constant="8" id="SGw-OH-PFg"/>
+                                                <constraint firstItem="MlD-fn-CWn" firstAttribute="leading" secondItem="QI6-j5-Tef" secondAttribute="trailing" constant="12" id="SGw-OH-PFg"/>
                                                 <constraint firstItem="hK6-px-NVP" firstAttribute="top" secondItem="fbs-7I-mTC" secondAttribute="bottom" constant="8" id="SPf-1L-Krd"/>
                                                 <constraint firstAttribute="bottom" secondItem="f8q-qu-Qn2" secondAttribute="bottom" constant="12.5" id="YBE-zK-imv"/>
                                                 <constraint firstAttribute="bottom" secondItem="hK6-px-NVP" secondAttribute="bottom" constant="12.5" id="aLb-RI-EqV"/>
@@ -140,8 +140,16 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="l9g-Mw-CFJ"/>
+                    <navigationItem key="navigationItem" id="l9g-Mw-CFJ">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="uwn-Bc-VLC">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="didTapFilterButton:" destination="BYZ-38-t0r" id="4gh-jt-Z4w"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="filterTweetButton" destination="uwn-Bc-VLC" id="tV5-eU-zwY"/>
                         <outlet property="tweetTableView" destination="cdt-GS-UNR" id="PCM-oC-91x"/>
                     </connections>
                 </viewController>
@@ -153,11 +161,12 @@
         <scene sceneID="99v-U2-GRF">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="EvC-ww-4QT" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Tweets" id="rDM-qw-kfc"/>
+                    <tabBarItem key="tabBarItem" title="Tweets" image="twitter" id="rDM-qw-kfc"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iP9-2j-RKo">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -168,7 +177,7 @@
             </objects>
             <point key="canvasLocation" x="308" y="-172"/>
         </scene>
-        <!--Root View Controller-->
+        <!--Bookmarks-->
         <scene sceneID="WwA-fx-eyI">
             <objects>
                 <tableViewController id="vnk-aa-7Sn" customClass="BookmarkViewController" customModule="PregBuddy_Tweets" customModuleProvider="target" sceneMemberID="viewController">
@@ -181,7 +190,7 @@
                             <outlet property="delegate" destination="vnk-aa-7Sn" id="woj-kb-NLT"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="Vjz-vk-AvD"/>
+                    <navigationItem key="navigationItem" title="Bookmarks" id="Vjz-vk-AvD"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="00M-YR-6nQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -191,7 +200,7 @@
         <scene sceneID="pg0-Xj-bGW">
             <objects>
                 <navigationController id="Gw4-wW-imv" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Bookmarks" id="6o8-Iq-wC9"/>
+                    <tabBarItem key="tabBarItem" title="Bookmarks" image="bookmark" id="6o8-Iq-wC9"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wec-Dm-hii">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -213,6 +222,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="EvC-ww-4QT" kind="relationship" relationship="viewControllers" id="lTH-2G-fxH"/>
@@ -225,7 +235,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="bookmark" width="25" height="25"/>
         <image name="heart" width="32" height="32"/>
         <image name="retweet" width="32" height="32"/>
+        <image name="twitter" width="25" height="25"/>
     </resources>
 </document>

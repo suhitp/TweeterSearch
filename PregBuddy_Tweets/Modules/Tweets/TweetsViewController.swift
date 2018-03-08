@@ -9,43 +9,91 @@
 import UIKit
 import TwitterKit
 
-class TweetsViewController: UIViewController {
-   
+class TweetsViewController: UIViewController, TweetViewInput {
+    
     @IBOutlet weak var tweetTableView: UITableView!
-    var tweets = [TWTRTweet]()
+    @IBOutlet weak var filterTweetButton: UIBarButtonItem!
+    lazy var footerView = FooterView()
+    var tweetsPresenter: TweetsPresenterType!
+    var tweets: [TWTRTweet] = []
+    var loadMoreState: LoadMoreState = .none
+    
+    private lazy var spinner: UIActivityIndicatorView = {
+        let activityIndictor = UIActivityIndicatorView()
+        activityIndictor.translatesAutoresizingMaskIntoConstraints = false
+        activityIndictor.activityIndicatorViewStyle = .gray
+        activityIndictor.hidesWhenStopped = true
+        activityIndictor.startAnimating()
+        return activityIndictor
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         setupViews()
-        themeViews()
         loadTweets()
     }
 
     private func setupViews() {
         title = "Tweets"
-        navigationController?.navigationBar.tintColor = .black
-        tweetTableView.tableFooterView = UIView()
+        filterTweetButton.isEnabled = false
         tweetTableView.estimatedRowHeight = 100
         tweetTableView.rowHeight = UITableViewAutomaticDimension
+        tweetTableView.tableFooterView = footerView
     }
     
-    private func themeViews() {
-        self.view.backgroundColor = .white
-        self.tweetTableView.backgroundColor = .lightGray
+    func showLoader() {
+        view.addSubview(spinner)
+        spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        spinner.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        spinner.startAnimating()
+    }
+    
+    func hideLoader() {
+        spinner.stopAnimating()
+        spinner.removeFromSuperview()
     }
     
     private func loadTweets() {
-        let apiClient = TweeterAPIClient()
-        apiClient.loadTweets(forText: "pregnancy", maxId: nil) { (result) in
-            switch result {
-            case .success(let tweets):
-                self.tweets = tweets
-                self.tweetTableView.reloadData()
-            case .error(let error):
-                print(error)
-            }
+        tweetsPresenter.loadTweets()
+    }
+    
+    func displayTweets(_ tweets: [TWTRTweet]) {
+        self.tweets = tweets
+        filterTweetButton.isEnabled = true
+        tweetTableView.reloadData()
+    }
+    
+    func insert(_ tweets: [TWTRTweet], at indexPaths: [IndexPath]) {
+        self.tweets += tweets
+        tweetTableView.beginUpdates()
+        tweetTableView.insertRows(at: indexPaths, with: .fade)
+        tweetTableView.endUpdates()
+    }
+    
+    func showError(_ error: NetworkError) {
+        switch error {
+        case .noInternet: break
+        case .failure(_): break
+        case .timeout: break
         }
+    }
+    
+    @IBAction func didTapFilterButton(_ sender: UIBarButtonItem) {
+       // tweetsPresenter.didTapFilterButton()
+    }
+    
+    func showFilterOptions(_ options: String) {
+        
+    }
+    
+    func updateLoadMoreState(_ state: LoadMoreState) {
+        loadMoreState = state
+    }
+    
+    //MARK:- HideFooter
+    func hideFooter() {
+        tweetTableView.tableFooterView = UIView()
     }
     
     override func didReceiveMemoryWarning() {
@@ -54,7 +102,7 @@ class TweetsViewController: UIViewController {
     }
 }
 
-extension TweetsViewController: UITableViewDataSource, UITableViewDelegate, TweetViewHeightDelegate {
+extension TweetsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tweets.count
@@ -62,12 +110,17 @@ extension TweetsViewController: UITableViewDataSource, UITableViewDelegate, Twee
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TweetTableViewCell.reuseIdentifier, for: indexPath) as! TweetTableViewCell
-        cell.configure(with: tweets[indexPath.row], heightDelegate: self)
+        cell.configure(with: tweets[indexPath.row])
         return cell
     }
     
-    func didFinishLoadingTweetView() {
-        tweetTableView.beginUpdates()
-        tweetTableView.endUpdates()
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard loadMoreState != .loading || loadMoreState == .finished else {
+            return
+        }
+        if (tweets.count - 1 == indexPath.row) && tweetsPresenter.shouldLoadMoreTweets() {
+            tweetsPresenter.loadMoreTweets()
+            footerView.startAnimating()
+        }
     }
 }

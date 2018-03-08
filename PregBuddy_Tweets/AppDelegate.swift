@@ -16,8 +16,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        Twitter.sharedInstance().start(withConsumerKey: "R6yWPRlg2WHgrwQdqMSNATHzM", consumerSecret: "rfEsLFawxA1fa6RQiTPRZDP5h8gQuEzOuoQjY53nmXAQ0rnnff")
         // Override point for customization after application launch.
+        Twitter.sharedInstance().start(withConsumerKey: "R6yWPRlg2WHgrwQdqMSNATHzM", consumerSecret: "rfEsLFawxA1fa6RQiTPRZDP5h8gQuEzOuoQjY53nmXAQ0rnnff")
+        let rootConfigurator = RootConfigurator(window: window)
+        rootConfigurator.configureRootViewController()
         return true
     }
 

@@ -14,9 +14,6 @@ final class TweetTableViewCell: UITableViewCell {
     
     // MARK: - Private Variables
     static let reuseIdentifier = "TweetTableViewCell"
-   
-    weak var tweetViewHeightDelegate: TweetViewHeightDelegate?
-    var tweetHeightConstraint: NSLayoutConstraint?
     
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -33,20 +30,16 @@ final class TweetTableViewCell: UITableViewCell {
     private func setupViews() {
         profileImageView.layer.cornerRadius = 8
         profileImageView.clipsToBounds = true
+        profileImageView.contentMode = .scaleAspectFit
     }
     
     // MARK: - Public Methods
-    func configure(with tweet: TWTRTweet, heightDelegate: TweetViewHeightDelegate) {
-        tweetViewHeightDelegate = heightDelegate
-        profileImageView.kf.setImage(with: URL(string: tweet.author.profileImageURL))
+    func configure(with tweet: TWTRTweet) {
+        profileImageView.kf.setImage(with: URL(string: tweet.author.profileImageURL), placeholder: nil)
         nameLabel.text = tweet.author.name
         screenNameLbl.text = "@" + tweet.author.screenName
         tweetTextView.text = tweet.text
         retweetCount.text = "\(tweet.retweetCount)"
         likeCount.text = "\(tweet.likeCount)"
     }
-}
-
-protocol TweetViewHeightDelegate: class {
-    func didFinishLoadingTweetView()
 }
