@@ -37,7 +37,7 @@ class TweetsViewController: UIViewController, TweetViewInput {
     private func setupViews() {
         title = "Tweets"
         filterTweetButton.isEnabled = false
-        tweetTableView.estimatedRowHeight = 100
+        tweetTableView.estimatedRowHeight = 142
         tweetTableView.rowHeight = UITableViewAutomaticDimension
         tweetTableView.tableFooterView = footerView
     }
@@ -80,25 +80,29 @@ class TweetsViewController: UIViewController, TweetViewInput {
     }
     
     @IBAction func didTapFilterButton(_ sender: UIBarButtonItem) {
-       // tweetsPresenter.didTapFilterButton()
-    }
-    
-    func showFilterOptions(_ options: String) {
-        
+        guard loadMoreState != .loading else { return }
+        tweetsPresenter.configureFilterOptions()
     }
     
     func updateLoadMoreState(_ state: LoadMoreState) {
         loadMoreState = state
     }
     
-    //MARK:- HideFooter
     func hideFooter() {
-        tweetTableView.tableFooterView = UIView()
+        tweetTableView.tableFooterView = nil
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    //MARK: ShowFilterActions
+    func showFilterOptions(_ options: [TweetFilterAction]) {
+        let actionSheet = UIAlertController(title: "Filter Tweets by", message: nil, preferredStyle: .actionSheet)
+        for action in options {
+            let actionItem = UIAlertAction(title: action.rawValue, style: .default, handler: { [weak self] _ in
+                self?.tweetsPresenter.filterTweets(by: action)
+            })
+            actionSheet.addAction(actionItem)
+        }
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(actionSheet, animated: true, completion: nil)
     }
 }
 
@@ -122,5 +126,9 @@ extension TweetsViewController: UITableViewDataSource, UITableViewDelegate {
             tweetsPresenter.loadMoreTweets()
             footerView.startAnimating()
         }
+    }
+    
+    func scrollToTop() {
+        tweetTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
     }
 }

@@ -15,10 +15,18 @@ enum LoadMoreState {
     case finished
 }
 
+enum TweetFilterAction: String {
+    case all = "all"
+    case likes = "likes"
+    case retweet = "retweet"
+}
+
 protocol TweetsPresenterType: class {
     func loadTweets()
     func shouldLoadMoreTweets() -> Bool
     func loadMoreTweets()
+    func configureFilterOptions()
+    func filterTweets(by action: TweetFilterAction)
 }
 
 protocol TweetViewInput: class {
@@ -26,9 +34,11 @@ protocol TweetViewInput: class {
     func insert(_ tweets: [TWTRTweet], at indexPaths: [IndexPath])
     func showError(_ error: NetworkError)
     func updateLoadMoreState(_ state: LoadMoreState)
+    func showFilterOptions(_ options: [TweetFilterAction])
     func showLoader()
     func hideLoader()
     func hideFooter()
+    func scrollToTop()
 }
 
 final class TweetsPresenter: TweetsPresenterType {
@@ -96,7 +106,30 @@ final class TweetsPresenter: TweetsPresenterType {
     }
 }
 
-struct Constants {
-    static let tweetSearchKeyword = "Swift programming"
-    static let maxTweetDisplayCount = 100
+extension TweetsPresenter {
+
+    func configureFilterOptions() {
+        let options: [TweetFilterAction] = [.likes, .retweet, .all]
+        self.view.showFilterOptions(options)
+    }
+    
+    func filterTweets(by action: TweetFilterAction) {
+        switch action {
+        case .likes:
+            let mostLikedTweets = tweets.sorted(by: { $0.likeCount > $1.likeCount }).prefix(10)
+            self.view.displayTweets(Array(mostLikedTweets))
+            self.view.updateLoadMoreState(.finished)
+        case .retweet:
+            let mostRetweetedTweets = tweets.sorted(by: { $0.retweetCount > $1.retweetCount }).prefix(10)
+            self.view.displayTweets(Array(mostRetweetedTweets))
+            self.view.updateLoadMoreState(.finished)
+        case .all:
+            self.view.displayTweets(tweets)
+            if self.tweets.count == Constants.maxTweetDisplayCount {
+                view.updateLoadMoreState(.finished)
+            } else {
+                view.updateLoadMoreState(.ready)
+            }
+        }
+    }
 }
