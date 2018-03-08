@@ -18,7 +18,7 @@ final class TweetTableViewCell: UITableViewCell {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var screenNameLbl: UILabel!
-    @IBOutlet weak var tweetTextView: UITextView!
+    @IBOutlet weak var tweetLabel: UILabel!
     @IBOutlet weak var retweetCount: UILabel!
     @IBOutlet weak var likeCount: UILabel!
     
@@ -38,7 +38,7 @@ final class TweetTableViewCell: UITableViewCell {
         profileImageView.kf.setImage(with: URL(string: tweet.author.profileImageURL), placeholder: nil)
         nameLabel.text = tweet.author.name
         screenNameLbl.text = "@" + tweet.author.screenName
-        tweetTextView.text = tweet.text
+        tweetLabel.text = tweet.text
         retweetCount.text = "\(tweet.retweetCount)"
         likeCount.text = "\(tweet.likeCount)"
     }

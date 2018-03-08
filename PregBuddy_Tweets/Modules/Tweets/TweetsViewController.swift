@@ -37,8 +37,8 @@ class TweetsViewController: UIViewController, TweetViewInput {
     private func setupViews() {
         title = "Tweets"
         filterTweetButton.isEnabled = false
-        tweetTableView.estimatedRowHeight = 142
         tweetTableView.rowHeight = UITableViewAutomaticDimension
+        tweetTableView.estimatedRowHeight = 143
         tweetTableView.tableFooterView = footerView
     }
     
@@ -66,9 +66,15 @@ class TweetsViewController: UIViewController, TweetViewInput {
     
     func insert(_ tweets: [TWTRTweet], at indexPaths: [IndexPath]) {
         self.tweets += tweets
-        tweetTableView.beginUpdates()
-        tweetTableView.insertRows(at: indexPaths, with: .fade)
-        tweetTableView.endUpdates()
+        if #available(iOS 11, *) {
+            tweetTableView.performBatchUpdates({
+                tweetTableView.insertRows(at: indexPaths, with: .fade)
+            }, completion: nil)
+        } else {
+            tweetTableView.beginUpdates()
+            tweetTableView.insertRows(at: indexPaths, with: .fade)
+            tweetTableView.endUpdates()
+        }
     }
     
     func showError(_ error: NetworkError) {
