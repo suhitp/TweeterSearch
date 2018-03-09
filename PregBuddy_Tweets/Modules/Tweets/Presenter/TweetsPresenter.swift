@@ -68,9 +68,6 @@ final class TweetsPresenter: TweetsPresenterType {
                 strongSelf.updateTweetModel(tweets: tweets)
                 strongSelf.view.hideLoader()
                 strongSelf.view.displayTweets(tweets)
-                if let lastTweet = tweets.last, let tweetId = Int(lastTweet.tweetID) {
-                    strongSelf.maxId = tweetId
-                }
             case .error(let error):
                 self?.view.hideLoader()
                 self?.view.showError(error)
@@ -101,7 +98,10 @@ final class TweetsPresenter: TweetsPresenterType {
     
     func updateTweetModel(tweets: [TWTRTweet]) {
         self.tweets += tweets
-        if self.tweets.count == Constants.maxTweetDisplayCount {
+        if let lastTweet = tweets.last, let tweetId = Int(lastTweet.tweetID) {
+            maxId = tweetId
+        }
+        if self.tweets.count >= Constants.maxTweetDisplayCount {
             view.updateLoadMoreState(.finished)
             view.hideFooter()
         } else {

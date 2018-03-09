@@ -70,11 +70,11 @@ class TweetsViewController: UIViewController, TweetViewInput {
         self.tweets += tweets
         if #available(iOS 11, *) {
             tweetTableView.performBatchUpdates({
-                tweetTableView.insertRows(at: indexPaths, with: .fade)
+                tweetTableView.insertRows(at: indexPaths, with: .none)
             }, completion: nil)
         } else {
             tweetTableView.beginUpdates()
-            tweetTableView.insertRows(at: indexPaths, with: .fade)
+            tweetTableView.insertRows(at: indexPaths, with: .none)
             tweetTableView.endUpdates()
         }
     }

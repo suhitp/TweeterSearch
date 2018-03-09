@@ -29,7 +29,7 @@ struct TweeterAPIClient {
     
     func loadTweets(forText text: String, maxId: Int?, completion: @escaping ((Result) -> Void)) {
         
-        var params: [String: String] = ["q": text, "result_type": "recent", "count": "20"]
+        var params: [String: String] = ["q": text, "result_type": "recent", "include_entities": "false", "count": "20"]
         if let maxId = maxId {
             params["max_id"] = String(maxId)
         }
