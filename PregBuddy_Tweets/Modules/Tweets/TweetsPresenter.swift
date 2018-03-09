@@ -27,6 +27,8 @@ protocol TweetsPresenterType: class {
     func loadMoreTweets()
     func configureFilterOptions()
     func filterTweets(by action: TweetFilterAction)
+    func bookmark(tweet: TWTRTweet)
+    func didTapBookmarkButtonWith(tweetId: String)
 }
 
 protocol TweetViewInput: class {
@@ -39,6 +41,7 @@ protocol TweetViewInput: class {
     func hideLoader()
     func hideFooter()
     func scrollToTop()
+    func showBookmarkActionSheet(title: String, forTweet tweet: TWTRTweet)
 }
 
 final class TweetsPresenter: TweetsPresenterType {
@@ -131,6 +134,28 @@ extension TweetsPresenter {
             } else {
                 view.updateLoadMoreState(.ready)
             }
+        }
+    }
+    
+    func didTapBookmarkButtonWith(tweetId: String) {
+        if let tweet = tweets.filter ({ $0.tweetID == tweetId }).first {
+            self.view.showBookmarkActionSheet(title: Constants.bookmarkTweetTitle, forTweet: tweet)
+        }
+    }
+    
+    func bookmark(tweet: TWTRTweet) {
+        let userDefault = UserDefaults.standard
+        if let data = userDefault.data(forKey: Constants.bookmarkTweets) {
+             if var bookmarkTweets = NSKeyedUnarchiver.unarchiveObject(with: data) as? [TWTRTweet] {
+                guard !bookmarkTweets.contains(tweet) else { return }
+                bookmarkTweets.append(tweet)
+                let encodedTweets = NSKeyedArchiver.archivedData(withRootObject: bookmarkTweets)
+                userDefault.set(encodedTweets, forKey: Constants.bookmarkTweets)
+            }
+        } else {
+            let bookmarkTweets: [TWTRTweet] = [tweet]
+            let encodedTweets = NSKeyedArchiver.archivedData(withRootObject: bookmarkTweets)
+            userDefault.set(encodedTweets, forKey: Constants.bookmarkTweets)
         }
     }
 }

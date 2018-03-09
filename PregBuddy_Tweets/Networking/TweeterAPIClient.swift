@@ -19,13 +19,16 @@ enum NetworkError: Error {
 }
 
 struct TweeterAPIClient {
-
-    let url = "https://api.twitter.com/1.1/search/tweets.json"
-    let consumerKey = "R6yWPRlg2WHgrwQdqMSNATHzM"
-    let secret = "rfEsLFawxA1fa6RQiTPRZDP5h8gQuEzOuoQjY53nmXAQ0rnnff"
-    let client = TWTRAPIClient()
+    let client: TWTRAPIClient
+    let url: String
+    
+    init(client: TWTRAPIClient, url: String) {
+        self.client = client
+        self.url = url
+    }
     
     func loadTweets(forText text: String, maxId: Int?, completion: @escaping ((Result) -> Void)) {
+        
         var params: [String: String] = ["q": text, "result_type": "recent", "count": "20"]
         if let maxId = maxId {
             params["max_id"] = String(maxId)

@@ -40,6 +40,8 @@ class TweetsViewController: UIViewController, TweetViewInput {
         tweetTableView.rowHeight = UITableViewAutomaticDimension
         tweetTableView.estimatedRowHeight = 143
         tweetTableView.tableFooterView = footerView
+        let nib = UINib.init(nibName: "TweetCell", bundle: Bundle.main)
+        tweetTableView.register(nib, forCellReuseIdentifier: TweetCell.reuseIdentifier)
     }
     
     func showLoader() {
@@ -125,6 +127,16 @@ class TweetsViewController: UIViewController, TweetViewInput {
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         self.present(actionSheet, animated: true, completion: nil)
     }
+    
+    func showBookmarkActionSheet(title: String, forTweet tweet: TWTRTweet) {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let bookmarkAction = UIAlertAction(title: title, style: .default, handler: { [unowned self] _ in
+            self.tweetsPresenter.bookmark(tweet: tweet)
+        })
+        actionSheet.addAction(bookmarkAction)
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(actionSheet, animated: true, completion: nil)
+    }
 }
 
 extension TweetsViewController: UITableViewDataSource, UITableViewDelegate {
@@ -134,8 +146,8 @@ extension TweetsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: TweetTableViewCell.reuseIdentifier, for: indexPath) as! TweetTableViewCell
-        cell.configure(with: tweets[indexPath.row])
+        let cell = tableView.dequeueReusableCell(withIdentifier: TweetCell.reuseIdentifier, for: indexPath) as! TweetCell
+        cell.configure(with: tweets[indexPath.row], delegate: self)
         return cell
     }
     
@@ -149,7 +161,17 @@ extension TweetsViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
     func scrollToTop() {
         tweetTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+    }
+}
+
+extension TweetsViewController: BookmarkTweetEventDelegate {
+    func didTapBookmarkTweetWith(tweetId : String) {
+        self.tweetsPresenter.didTapBookmarkButtonWith(tweetId: tweetId)
     }
 }

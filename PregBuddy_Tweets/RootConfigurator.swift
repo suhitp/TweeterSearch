@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TwitterKit
 
 final class RootConfigurator {
     private let window: UIWindow?
@@ -28,13 +29,15 @@ final class RootConfigurator {
     }
     
     func configureTweetsView(_ tweetVC: TweetsViewController?) {
-        let client = TweeterAPIClient()
+        let client = TweeterAPIClient(client: TWTRAPIClient(), url: Constants.tweeterApiUrl)
         let tweetsPresenter = TweetsPresenter(client: client)
         tweetVC?.tweetsPresenter = tweetsPresenter
         tweetsPresenter.view = tweetVC
     }
     
     func configureBookmarkView(_ bookmarkVC: BookmarkViewController?) {
-        
+        let bookmarkPresenter = BookmarkPresenter()
+        bookmarkVC?.bookmarkPresenter = bookmarkPresenter
+        bookmarkPresenter.view = bookmarkVC
     }
 }
