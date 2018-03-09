@@ -69,7 +69,7 @@ final class TweetsPresenter: TweetsPresenterType {
                 strongSelf.view.hideLoader()
                 strongSelf.view.displayTweets(tweets)
                 if let lastTweet = tweets.last, let tweetId = Int(lastTweet.tweetID) {
-                    strongSelf.maxId = tweetId - 1
+                    strongSelf.maxId = tweetId
                 }
             case .error(let error):
                 self?.view.hideLoader()

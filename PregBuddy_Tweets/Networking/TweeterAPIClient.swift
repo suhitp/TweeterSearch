@@ -49,8 +49,8 @@ struct TweeterAPIClient {
             do {
                let json  = try JSONSerialization.jsonObject(with: data!, options: []) as! [String: Any]
                 if let tweetArray = (json["statuses"] as? [[String: Any]]) {
-                    let tweets = TWTRTweet.tweets(withJSONArray: tweetArray)
-                    completion(.success(tweets as! [TWTRTweet]))
+                    let tweets = TWTRTweet.tweets(withJSONArray: tweetArray) as! [TWTRTweet]
+                    completion(.success(tweets))
                 }
             } catch {
                 if maxId != nil {
