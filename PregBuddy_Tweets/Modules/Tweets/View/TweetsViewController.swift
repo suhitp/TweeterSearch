@@ -111,6 +111,10 @@ class TweetsViewController: UIViewController, TweetViewInput {
         loadMoreState = state
     }
     
+    func showFooter() {
+        tweetTableView.tableFooterView = footerView
+    }
+    
     func hideFooter() {
         tweetTableView.tableFooterView = nil
     }

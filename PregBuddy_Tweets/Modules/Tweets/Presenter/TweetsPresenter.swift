@@ -39,6 +39,7 @@ protocol TweetViewInput: class {
     func showFilterOptions(_ options: [TweetFilterAction])
     func showLoader()
     func hideLoader()
+    func showFooter()
     func hideFooter()
     func scrollToTop()
     func showBookmarkActionSheet(title: String, forTweet tweet: TWTRTweet)
@@ -121,18 +122,21 @@ extension TweetsPresenter {
         switch action {
         case .likes:
             let mostLikedTweets = tweets.sorted(by: { $0.likeCount > $1.likeCount }).prefix(10)
-            self.view.displayTweets(Array(mostLikedTweets))
-            self.view.updateLoadMoreState(.finished)
+            view.displayTweets(Array(mostLikedTweets))
+            view.hideFooter()
+            view.updateLoadMoreState(.finished)
         case .retweet:
             let mostRetweetedTweets = tweets.sorted(by: { $0.retweetCount > $1.retweetCount }).prefix(10)
-            self.view.displayTweets(Array(mostRetweetedTweets))
-            self.view.updateLoadMoreState(.finished)
+            view.displayTweets(Array(mostRetweetedTweets))
+            view.hideFooter()
+            view.updateLoadMoreState(.finished)
         case .all:
             self.view.displayTweets(tweets)
             if self.tweets.count == Constants.maxTweetDisplayCount {
                 view.updateLoadMoreState(.finished)
             } else {
                 view.updateLoadMoreState(.ready)
+                view.showFooter()
             }
         }
     }
