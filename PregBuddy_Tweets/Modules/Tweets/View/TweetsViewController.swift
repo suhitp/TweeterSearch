@@ -152,7 +152,7 @@ extension TweetsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard loadMoreState != .loading || loadMoreState == .finished else {
+        guard loadMoreState == .none || loadMoreState == .ready else {
             return
         }
         if (tweets.count - 1 == indexPath.row) && tweetsPresenter.shouldLoadMoreTweets() {

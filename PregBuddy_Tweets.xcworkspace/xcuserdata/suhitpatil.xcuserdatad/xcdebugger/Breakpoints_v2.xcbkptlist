@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PregBuddy_Tweets/Modules/Tweets/Presenter/TweetsPresenter.swift"
+            timestampString = "542779165.039211"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
+            landmarkName = "filterTweets(by:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PregBuddy_Tweets.TweetsPresenter.filterTweets(by: PregBuddy_Tweets.TweetFilterAction) -&gt; ()"
+                  moduleName = "PregBuddy_Tweets"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/suhitpatil/Developer/Code/iOS/Projects/PregBuddy_Tweets/PregBuddy_Tweets/Modules/Tweets/Presenter/TweetsPresenter.swift"
+                  timestampString = "542779165.216833"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "123"
+                  endingLineNumber = "123"
+                  offsetFromSymbolStart = "113">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__ObjC.TWTRTweet, __ObjC.TWTRTweet) -&gt; Swift.Bool in PregBuddy_Tweets.TweetsPresenter.filterTweets(by: PregBuddy_Tweets.TweetFilterAction) -&gt; ()"
+                  moduleName = "PregBuddy_Tweets"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/suhitpatil/Developer/Code/iOS/Projects/PregBuddy_Tweets/PregBuddy_Tweets/Modules/Tweets/Presenter/TweetsPresenter.swift"
+                  timestampString = "542779165.226864"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "123"
+                  endingLineNumber = "123"
+                  offsetFromSymbolStart = "18">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PregBuddy_Tweets/Modules/Tweets/Presenter/TweetsPresenter.swift"
+            timestampString = "542779165.0393029"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
+            landmarkName = "configureFilterOptions()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PregBuddy_Tweets/Modules/Tweets/Presenter/TweetsPresenter.swift"
+            timestampString = "542779165.039359"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
+            landmarkName = "filterTweets(by:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
